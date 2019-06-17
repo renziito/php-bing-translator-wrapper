@@ -1,0 +1,25 @@
+{
+  "name": "renziito/php-bing-translator-wrapper",
+  "description": "Wrappers for Bing translator",
+  "type": "library",
+  "keywords": ["renziito", "bing", "translator"],
+  "require": {
+    "php": ">=5.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7"
+  },
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Renziito",
+      "email": "sepia.aki@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Renziito\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}
