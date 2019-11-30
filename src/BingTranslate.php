@@ -32,7 +32,6 @@ class BingTranslate {
     private $source;
     private $target;
     private $url;
-    private $curl;
 
     function getText() {
         return $this->text;
@@ -50,9 +49,6 @@ class BingTranslate {
         return $this->url;
     }
 
-    function getCurl() {
-        return $this->curl;
-    }
 
     function setText($text) {
         $this->text = $text;
@@ -70,21 +66,10 @@ class BingTranslate {
         $this->url = $url;
     }
 
-    function setCurl($curl) {
-        $this->curl = $curl;
-    }
 
     function __construct() {
         $url = self::URL . self::TRANSLATE . '?IG=' . self::IG . '&IID=' . self::IID;
         $this->setUrl($url);
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_USERAGENT, self::AGENT);
-        $this->setCurl($ch);
     }
 
     /**
@@ -113,7 +98,12 @@ class BingTranslate {
             'fromLang' => $this->getSource(),
             'to'       => $this->getTarget()
         ];
-        $ch         = $this->getCurl();
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_USERAGENT, self::AGENT);
         curl_setopt($ch, CURLOPT_URL, $this->getUrl());
         curl_setopt($ch, CURLOPT_POST, count($params));
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
